@@ -1,14 +1,10 @@
-/* 调整播放器位置 */
-.music-player {
-  margin-top: 80px !important;
-  transform: translateX(10px);
-}
+
 
 /* 播放器容器 */
 .music-player {
-  margin: 290px 20px 90px -50px !important; /* 上 右 下 左 */
-  width: 280px; 
-  transform: scale(0.95); /* 整体缩放 */
+  margin: 300px 20px 50px -86px !important; /* 上 右 下 左 */
+  width: 400px; 
+  transform: scale(0.97); /* 整体缩放 */
 }
 
 
