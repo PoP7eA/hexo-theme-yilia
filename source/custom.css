@@ -10,3 +10,43 @@
   width: 280px; 
   transform: scale(0.95); /* 整体缩放 */
 }
+
+
+
+/* 针对文章内容中的图片 */
+.post-content img {
+  max-width: 50% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 20px auto !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+/* 解除父容器约束 */
+.post-content {
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* 所有图片自动缩放 */
+img {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 解除潜在限制 */
+.article-inner {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* 修复移动端适配 */
+@media (max-width: 768px) {
+  .post-content img {
+    max-width: 100% !important;
+    margin: 10px auto !important;
+  }
+}
