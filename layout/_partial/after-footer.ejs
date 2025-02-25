@@ -19,3 +19,37 @@
 <% if (theme.mathjax){ %>
 <%- partial('mathjax') %>
 <% } %>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- 新增 MetingJS 支持 -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+<div id="aplayer-container"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ap = new APlayer({
+        container: document.getElementById('aplayer-container'),
+        fixed: true,
+        mini: true,  // 推荐开启迷你模式
+        autoplay: false, // 网易云禁止自动播放
+        mutex: true, // 互斥播放
+        theme: '#2980b9', // 主题色
+        loop: 'all', // 循环模式
+        order: 'random', // 播放顺序
+        preload: 'auto',
+        audio: []
+    });
+    
+    // 通过 MetingJS 加载网易云资源
+    fetch('https://api.i-meto.com/meting/api?server=netease&type=song&id=493454214')
+    .then(response => response.json())
+    .then(data => {
+        ap.list.add(data); // 添加音乐到播放列表
+        ap.play(); // 用户交互后播放
+    });
+    
+    window.ap = ap;
+});
+</script>
