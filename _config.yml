@@ -81,6 +81,13 @@ duoshuo: false
 #2、网易云跟帖
 wangyiyun: true
 
+# 网易云音乐插件
+music:
+  enable: true
+  id: 13366111535  # 替换为你的歌单ID
+  autoPlay: true  # 必须为 true
+  text: '自动播放已启用，请点击页面以激活音频'
+
 #3、畅言
 changyan_appid: false
 changyan_conf: false
