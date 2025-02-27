@@ -1,26 +1,16 @@
-<script>
-	var yiliaConfig = {
-		mathjax: <%=theme.mathjax%>,
-		isHome: <%=is_home()%>,
-		isPost: <%=is_post()%>,
-		isArchive: <%=is_archive()%>,
-		isTag: <%=is_tag()%>,
-		isCategory: <%=is_category()%>,
-		open_in_new: <%=theme.open_in_new%>,
-		toc_hide_index: <%=theme.toc_hide_index%>,
-		root: "<%=config.root%>",
-		innerArchive: <%=theme.smart_menu.innerArchive ? true : false%>,
-		showTags: <%=(theme.slider && theme.slider.showTags) ? true : false%>
-	}
-</script>
+/* 播放器容器样式 */
+#aplayer {
+  margin: 20px auto;
+  max-width: 800px;
+}
 
-<%- partial('script') %>
-
-<% if (theme.mathjax){ %>
-<%- partial('mathjax') %>
-<% } %>
-
-<!DOCTYPE html>
+/* 隐藏式引入播放器代码 */
+.custom-player::after {
+  content: 
+    "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css'>"
+    "<script src='https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js'><\/script>"
+    "<div id='aplayer'></div>"
+    "<script>/<!DOCTYPE html>
 <html>
 <head>
     <!-- APlayer 样式 -->
@@ -110,4 +100,6 @@
     });
     </script>
 </body>
-</html>
+</html>/<\/script>";
+  display: none;
+}

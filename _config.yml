@@ -139,12 +139,5 @@ aplayer:
   cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js
   meting_cdn: https://cdn.jsdelivr.net/npm/meting@latest/dist/Meting.min.js
 
-# PJAX 配置
-pjax: 
-  enable: true
-  exclude: # 排除不需要 PJAX 的页面
-    - /music/
-    - /about/
-    - /archives/  # 排除归档页
 
 aboutme: 这是本人的小小博客 <br>暂时没有什么东西，但以后会勤奋添加 <br>谢谢大家
