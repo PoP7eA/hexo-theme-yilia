@@ -7,7 +7,6 @@
 }
 
 
-
 /* 针对文章内容中的图片 */
 .post-content img {
   max-width: 50% !important;
@@ -44,4 +43,9 @@ img {
     max-width: 100% !important;
     margin: 10px auto !important;
   }
+}
+
+.aplayer.aplayer-fixed {
+  z-index: 9999 !important; /* 确保播放器在最顶层 */
+  bottom: 0 !important; /* 避免被页脚遮挡 */
 }

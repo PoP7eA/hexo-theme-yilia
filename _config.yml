@@ -132,11 +132,19 @@ friends:
   友情链接5: http://localhost:4000/
   友情链接6: http://localhost:4000/
 
-# APlayer 插件配置
+# _config.yml
 aplayer:
-  meting: true          # 启用 MetingJS 支持（网易云/QQ音乐等）
-  asset_inject: false   # 关闭自动注入资源（避免与 Yilia 主题冲突）
-  cdn: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js
-  meting_cdn: https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js
+  meting: true
+  asset_inject: false
+  cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js
+  meting_cdn: https://cdn.jsdelivr.net/npm/meting@latest/dist/Meting.min.js
+
+# PJAX 配置
+pjax: 
+  enable: true
+  exclude: # 排除不需要 PJAX 的页面
+    - /music/
+    - /about/
+    - /archives/  # 排除归档页
 
 aboutme: 这是本人的小小博客 <br>暂时没有什么东西，但以后会勤奋添加 <br>谢谢大家

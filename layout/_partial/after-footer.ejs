@@ -14,42 +14,95 @@
 	}
 </script>
 
-<%- partial('script') %>
 
-<% if (theme.mathjax){ %>
-<%- partial('mathjax') %>
-<% } %>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- APlayer 样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+</head>
+<body>
+    <!-- 播放器容器 -->
+    <div id="aplayer"></div>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<!-- 新增 MetingJS 支持 -->
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+    <!-- 依赖库 -->
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
 
-<div id="aplayer-container"></div>
+    <!-- 主逻辑 -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化播放器
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true,
+            mini: true,
+            autoplay: false,
+            mutex: true,
+            theme: '#2980b9',
+            loop: 'all',
+            order: 'random',
+            preload: 'auto',
+            audio: []
+        });
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const ap = new APlayer({
-        container: document.getElementById('aplayer-container'),
-        fixed: true,
-        mini: true,  // 推荐开启迷你模式
-        autoplay: false, // 网易云禁止自动播放
-        mutex: true, // 互斥播放
-        theme: '#2980b9', // 主题色
-        loop: 'all', // 循环模式
-        order: 'random', // 播放顺序
-        preload: 'auto',
-        audio: []
+        // 状态保存系统
+        window.onbeforeunload = () => {
+            localStorage.setItem("playInfo", JSON.stringify({
+                index: ap.list.index,
+                currentTime: ap.audio.currentTime,
+                paused: ap.paused
+            }));
+        };
+
+        // 音乐加载系统
+        fetch('https://api.i-meto.com/meting/api?server=netease&type=playlist&id=13366111535')
+            .then(response => {
+                if (!response.ok) throw new Error('网络响应异常');
+                return response.json();
+            })
+            .then(data => {
+                // 数据格式标准化
+                const musicList = Array.isArray(data) ? data : [data];
+                
+                // 清空并更新播放列表
+                ap.list.clear();
+                ap.list.add(musicList);
+
+                // 状态恢复系统
+                const playInfo = JSON.parse(localStorage.getItem("playInfo"));
+                if (playInfo) {
+                    ap.list.switch(playInfo.index);
+                    
+                    // 使用事件监听确保加载完成
+                    ap.on('loadeddata', () => {
+                        ap.seek(playInfo.currentTime);
+                        if (!playInfo.paused) ap.play();
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('音乐加载失败:', error);
+                ap.list.add([{
+                    name: '加载失败',
+                    artist: '系统提示',
+                    url: '',
+                    cover: ''
+                }]);
+            });
+
+        // 交互式播放解锁
+        let hasUserInteracted = false;
+        document.body.addEventListener('click', () => {
+            if (!hasUserInteracted) {
+                hasUserInteracted = true;
+                if (ap.paused) ap.play();
+            }
+        });
+
+        // 全局访问（可选）
+        window.ap = ap;
     });
-    
-    // 通过 MetingJS 加载网易云资源
-    fetch('https://api.i-meto.com/meting/api?server=netease&type=song&id=493454214')
-    .then(response => response.json())
-    .then(data => {
-        ap.list.add(data); // 添加音乐到播放列表
-        ap.play(); // 用户交互后播放
-    });
-    
-    window.ap = ap;
-});
-</script>
+    </script>
+</body>
+</html>
