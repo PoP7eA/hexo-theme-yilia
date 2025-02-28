@@ -1,0 +1,7 @@
+/* 播放器位置样式 */
+#aplayer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+  }
