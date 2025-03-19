@@ -45,7 +45,7 @@ open_in_new: false
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
 reward_type: 2
 # 打赏wording
-reward_wording: '谢谢你请我吃糖果'
+reward_wording: '莫愁前路无知己'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
 alipay: /images/alipay.jpg
 # 微信二维码图片地址
@@ -79,7 +79,7 @@ share_jia: true
 duoshuo: false
 
 #2、网易云跟帖
-wangyiyun: true
+wangyiyun: false
 
 # 网易云音乐插件
 music:
@@ -140,4 +140,4 @@ aplayer:
   meting_cdn: https://cdn.jsdelivr.net/npm/meting@latest/dist/Meting.min.js
 
 
-aboutme: 这是本人的小小博客<br>暂时没有什么东西，但以后会勤奋添加<br>阿里嘎多
+aboutme: 此处长眠着<br>一个总把伞借给别人<br>自己却感冒的傻瓜<br>——直到雨季结束才明白<br>干燥的灵魂不需要雨具
